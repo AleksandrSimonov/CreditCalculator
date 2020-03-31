@@ -1,0 +1,61 @@
+﻿@model Calculator.Models.PaymentsTableData
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+
+    <script type="text/javascript" src="~/Scripts/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript" src="~/Scripts/popper.js"></script>
+</head>
+<body>
+    <div>
+        @using (Html.BeginForm())
+        {
+            <div class="container">
+        <div class="row">
+            <div class="col-lg-1 col-md-1"></div>
+            <div class="col-lg-10 col-md-10">
+                <div class="card border-light" >
+                    <div class="card-header">График платежей</div>
+                    <div class="card-body">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Номер платежа</th>
+                                    <th scope="col">Дата платежа</th>
+                                    <th scope="col">Размер платежа по телу</th>
+                                    <th scope="col">Размер платежа по %</th>
+                                    <th scope="col">Остаток основного долга</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @for (var i = 0; i < @Model.Payments.Count; i++)
+                                {
+                                    <tr>
+                                        <th scope="row">@Model.Payments[i].NumberPay</th>
+                                        <td>@Model.Payments[i].DatePay</td>
+                                        <td>@Model.Payments[i].PayByBody</td>
+                                        <td>@Model.Payments[i].PayByPercent</td>
+                                        <td>@Model.Payments[i].Balance</td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                        <h5 class="card-title">Итого переплата: @Model.TotalOverpayments</h5>
+                    </div>
+                    </div>
+            </div>
+            <div class="col-lg-1 col-md-1"></div>
+        </div>
+                </div>
+        }
+    </div>
+</body>
+</html>
